@@ -17,10 +17,10 @@ function query(filterBy) {
     return storageService.query(BOOK_KEY).then((books) => {
         if (filterBy.txt) {
             const regExp = new RegExp(filterBy.txt, 'i')
-            books = books.filter((book) => regExp.test(book.vendor))
+            books = books.filter((book) => regExp.test(book.title))
         }
-        if (filterBy.minSpeed) {
-            books = books.filter((book) => book.maxSpeed >= filterBy.minSpeed)
+        if (filterBy.maxPrice) {
+            books = books.filter((book) => book.price <= filterBy.maxPrice)
         }
         return books
     })
@@ -42,12 +42,12 @@ function save(book) {
     }
 }
 
-function getEmptyBook(vendor = '', maxSpeed = '') {
-    return { id: '', vendor, maxSpeed }
+function getEmptyBook(title = '', price = '') {
+    return { id: '', title, price }
 }
 
 function getDefaultFilter() {
-    return { txt: '', minSpeed: '' }
+    return { txt: '', maxPrice: '' }
 }
 
 function _createBooks() {
@@ -62,8 +62,8 @@ function _createBooks() {
     }
 }
 
-function _createBook(vendor, maxSpeed = 250) {
-    const book = getEmptyBook(vendor, maxSpeed)
+function _createBook(title, price = 250) {
+    const book = getEmptyBook(title, price)
     book.id = utilService.makeId()
     return book
 }

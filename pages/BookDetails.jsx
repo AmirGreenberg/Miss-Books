@@ -12,8 +12,8 @@ export function BookDetails({ bookId, onBack }) {
     if (!book) return <div>Loading...</div>
     return (
         <section className="book-details">
-            <h1>Book Vendor: {book.vendor}</h1>
-            <h1>Book Speed: {book.maxSpeed}</h1>
+            <h1>Title: {book.title}</h1>
+            <h1>Price: {book.price}</h1>
             <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Facilis quae fuga eveniet, quisquam ducimus modi optio in alias
