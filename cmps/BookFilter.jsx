@@ -33,19 +33,6 @@ export function BookFilter({ filterBy, onSetFilter }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    // function handleTxtChange({ target }) {
-    //     const value = target.value
-    //     setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, txt: value }))
-    //     // setFilterByToEdit(prevFilterBy => {
-    //     //     return { ...prevFilterBy, txt: value }
-    //     // })
-    // }
-
-    // function handleMaxPriceChange({ target }) {
-    //     const value = target.value
-    //     setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, maxPrice: value }))
-    // }
-
     const { txt, maxPrice } = filterByToEdit
     return (
         <section className="book-filter">

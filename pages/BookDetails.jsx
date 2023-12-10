@@ -13,7 +13,9 @@ export function BookDetails({ bookId, onBack }) {
     return (
         <section className="book-details">
             <h1>Title: {book.title}</h1>
-            <h1>Price: {book.price}</h1>
+            <h1>Price: {book.listPrice.currencyCode}{book.listPrice.amount}</h1>
+            <img src={`${book.thumbnail}`} />
+
             <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Facilis quae fuga eveniet, quisquam ducimus modi optio in alias
