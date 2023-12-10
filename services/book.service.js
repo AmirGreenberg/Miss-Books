@@ -125,7 +125,7 @@ function _createBooks() {
                 title: 'metus hendrerit',
                 subtitle: 'mi est eros convallis auctor arcu dapibus himenaeos',
                 authors: ['Barbara Cartland'],
-                publishedDate: 1999,
+                publishedDate: 2023,
                 description:
                     'placerat nisi sodales suscipit tellus tincidunt mauris elit sit luctus interdum ad dictum platea vehicula conubia fermentum habitasse congue suspendisse',
                 pageCount: 713,
@@ -143,7 +143,7 @@ function _createBooks() {
                 title: 'morbi',
                 subtitle: 'lorem euismod dictumst inceptos mi',
                 authors: ['Barbara Cartland'],
-                publishedDate: 1978,
+                publishedDate: 2022,
                 description:
                     'aliquam pretium lorem laoreet etiam odio cubilia iaculis placerat aliquam tempor nisl auctor',
                 pageCount: 129,
