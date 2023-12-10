@@ -1,7 +1,7 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
-const CAR_KEY = 'bookDB'
+const BOOK_KEY = 'bookDB'
 var gFilterBy = { txt: '', minSpeed: 0 }
 _createBooks()
 
@@ -17,7 +17,7 @@ export const bookService = {
 }
 
 function query() {
-    return storageService.query(CAR_KEY)
+    return storageService.query(BOOK_KEY)
         .then(books => {
             if (gFilterBy.txt) {
                 const regex = new RegExp(gFilterBy.txt, 'i')
@@ -31,18 +31,18 @@ function query() {
 }
 
 function get(bookId) {
-    return storageService.get(CAR_KEY, bookId)
+    return storageService.get(BOOK_KEY, bookId)
 }
 
 function remove(bookId) {
-    return storageService.remove(CAR_KEY, bookId)
+    return storageService.remove(BOOK_KEY, bookId)
 }
 
 function save(book) {
     if (book.id) {
-        return storageService.put(CAR_KEY, book)
+        return storageService.put(BOOK_KEY, book)
     } else {
-        return storageService.post(CAR_KEY, book)
+        return storageService.post(BOOK_KEY, book)
     }
 }
 
@@ -61,7 +61,7 @@ function setFilterBy(filterBy = {}) {
 }
 
 function getNextBookId(bookId) {
-    return storageService.query(CAR_KEY)
+    return storageService.query(BOOK_KEY)
         .then(books => {
             let nextBookIdx = books.findIndex(book => book.id === bookId) + 1
             if (nextBookIdx === books.length) nextBookIdx = 0
@@ -70,14 +70,14 @@ function getNextBookId(bookId) {
 }
 
 function _createBooks() {
-    let books = utilService.loadFromStorage(CAR_KEY)
+    let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = []
         books.push(_createBook('audu', 300))
         books.push(_createBook('fiak', 120))
         books.push(_createBook('subali', 100))
         books.push(_createBook('mitsu', 150))
-        utilService.saveToStorage(CAR_KEY, books)
+        utilService.saveToStorage(BOOK_KEY, books)
     }
 }
 
