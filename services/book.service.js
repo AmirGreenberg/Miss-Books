@@ -2,7 +2,6 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'bookDB'
-var gFilterBy = { txt: '', minSpeed: 0 }
 _createBooks()
 
 export const bookService = {
@@ -11,23 +10,20 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
-    getNextBookId,
-    getFilterBy,
-    setFilterBy
+    getDefaultFilter,
 }
 
-function query() {
-    return storageService.query(BOOK_KEY)
-        .then(books => {
-            if (gFilterBy.txt) {
-                const regex = new RegExp(gFilterBy.txt, 'i')
-                books = books.filter(book => regex.test(book.vendor))
-            }
-            if (gFilterBy.minSpeed) {
-                books = books.filter(book => book.maxSpeed >= gFilterBy.minSpeed)
-            }
-            return books
-        })
+function query(filterBy) {
+    return storageService.query(BOOK_KEY).then((books) => {
+        if (filterBy.txt) {
+            const regExp = new RegExp(filterBy.txt, 'i')
+            books = books.filter((book) => regExp.test(book.vendor))
+        }
+        if (filterBy.minSpeed) {
+            books = books.filter((book) => book.maxSpeed >= filterBy.minSpeed)
+        }
+        return books
+    })
 }
 
 function get(bookId) {
@@ -46,27 +42,12 @@ function save(book) {
     }
 }
 
-function getEmptyBook(vendor = '', maxSpeed = 0) {
+function getEmptyBook(vendor = '', maxSpeed = '') {
     return { id: '', vendor, maxSpeed }
 }
 
-function getFilterBy() {
-    return { ...gFilterBy }
-}
-
-function setFilterBy(filterBy = {}) {
-    if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-    if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
-    return gFilterBy
-}
-
-function getNextBookId(bookId) {
-    return storageService.query(BOOK_KEY)
-        .then(books => {
-            let nextBookIdx = books.findIndex(book => book.id === bookId) + 1
-            if (nextBookIdx === books.length) nextBookIdx = 0
-            return books[nextBookIdx].id
-        })
+function getDefaultFilter() {
+    return { txt: '', minSpeed: '' }
 }
 
 function _createBooks() {
@@ -75,7 +56,7 @@ function _createBooks() {
         books = []
         books.push(_createBook('audu', 300))
         books.push(_createBook('fiak', 120))
-        books.push(_createBook('subali', 100))
+        books.push(_createBook('subali', 50))
         books.push(_createBook('mitsu', 150))
         utilService.saveToStorage(BOOK_KEY, books)
     }
