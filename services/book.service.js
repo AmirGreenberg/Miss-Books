@@ -19,11 +19,33 @@ function query(filterBy) {
             const regExp = new RegExp(filterBy.txt, 'i')
             books = books.filter((book) => regExp.test(book.title))
         }
+
         if (filterBy.maxPrice) {
             books = books.filter(
                 (book) => book.listPrice.amount <= filterBy.maxPrice
             )
         }
+        
+       if (filterBy.subtxt) {
+           const regExp = new RegExp(filterBy.subtxt, 'i')
+           books = books.filter((book) => regExp.test(book.subtitle))
+       }
+    
+       if (filterBy.description) {
+           const regExp = new RegExp(filterBy.description, 'i')
+           books = books.filter((book) => regExp.test(book.description))
+       }
+      
+       if (filterBy.authors) {
+           const regExp = new RegExp(filterBy.authors, 'i')
+           books = books.filter((book) => regExp.test(book.authors))
+       }
+     
+       if (filterBy.categories) {
+           const regExp = new RegExp(filterBy.categories, 'i')
+           books = books.filter((book) => regExp.test(book.categories))
+       }
+
         return books
     })
 }
